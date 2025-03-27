@@ -35,7 +35,7 @@ param_grid = {
     "criterion" : ['gini', 'entropy'],
     "max_depth" : [2,5],
     "min_samples_split": [2,5,10],
-    "min_samples_leaf" : [1,2,4]
+    "min_samples_leaf" : [1,2]
 }
 
 
