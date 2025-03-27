@@ -90,6 +90,8 @@ best_model = grid_search.best_estimator_
 
 print("Best parameters:", grid_search.best_params_)
 print("Best accuracy:", grid_search.best_score_)
+# 모델 완료
+
 
 
 
