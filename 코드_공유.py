@@ -6,8 +6,10 @@ warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.datasets import load_wine
 
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score
 
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 
 wine = load_wine()
@@ -18,10 +20,34 @@ wine = load_wine()
 
 ''' 코드 작성 바랍니다 '''
 
+df = pd.DataFrame(data=wine.data, columns= wine.feature_names)
+df['target'] = wine.target
+
+X = df.drop('target', axis=1)
+y = df['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.2, random_state=42)
 
 ####### A 작업자 작업 수행 #######
 
-''' 코드 작성 바랍니다 '''
+
+param_grid = {
+    "criterion" : ['gini', 'entropy'],
+    "max_depth" : [2,5],
+    "min_samples_split": [2,5,10],
+    "min_samples_leaf" : [1,2,4]
+}
+
+
+clf_grid = DecisionTreeClassifier(random_state= 42)
+# core
+grid_search = GridSearchCV(clf_grid, param_grid, cv=5)
+grid_search.fit(X_train, y_train)
+
+print("Best Hyper-parameter", grid_search.best_params_)
+print("Best Score", grid_search.best_score_)
+
+
 
 
 
